@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.slider {
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+input {
+    display: none;
+}
+
+.slides {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: 0.5s ease;
+}
+
+.slide {
+    width: 300px;
+    height: 200px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+}
+
+.s1 { background: #3498db; }
+.s2 { background: #e74c3c; }
+.s3 { background: #2ecc71; }
+
+/* slide movement */
+#s1:checked ~ .slides { transform: translateX(0); }
+#s2:checked ~ .slides { transform: translateX(-300px); }
+#s3:checked ~ .slides { transform: translateX(-600px); }
+
+/* buttons */
+.controls label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: white;
+    background: rgba(0,0,0,0.4);
+    padding: 5px 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* left */
+.prev { left: 10px; }
+
+/* right */
+.next { right: 10px; }
+
+/* default hide all buttons */
+.controls label {
+    display: none;
+}
+
+/* show buttons per slide */
+#s1:checked ~ .controls label:nth-child(1),
+#s1:checked ~ .controls label:nth-child(2) {
+    display: block;
+}
+
+#s2:checked ~ .controls label:nth-child(3),
+#s2:checked ~ .controls label:nth-child(4) {
+    display: block;
+}
+
+#s3:checked ~ .controls label:nth-child(5),
+#s3:checked ~ .controls label:nth-child(6) {
+    display: block;
+}
+</style>
+</head>
+<body>
+	
+<div class="slider">
+
+	<input type="radio" name="s" id="s1" checked>
+	<input type="radio" name="s" id="s2">
+	<input type="radio" name="s" id="s3">
+
+	<div class="slides">
+		<div class="slide s1">Slide 1</div>
+		<div class="slide s2">Slide 2</div>
+		<div class="slide s3">Slide 3</div>
+	</div>
+
+	<!-- Navigation buttons -->
+	<div class="controls">
+		<label for="s3" class="prev">❮</label>
+		<label for="s2" class="next">❯</label>
+
+		<label for="s1" class="prev">❮</label>
+		<label for="s3" class="next">❯</label>
+
+		<label for="s2" class="prev">❮</label>
+		<label for="s1" class="next">❯</label>
+	</div>
+
+</div>
+</body>
+</html>

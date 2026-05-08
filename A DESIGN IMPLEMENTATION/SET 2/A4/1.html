@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		/* Reset */
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		/* Full screen + animated gradient */
+		body {
+			height: 100vh;
+			overflow: hidden;
+
+			/* gradient 4 warna */
+			background: linear-gradient(270deg,
+					#667eea,
+					#764ba2,
+					#f093fb,
+					#4facfe);
+
+			background-size: 800% 800%;
+
+			animation: gradientMove 12s ease infinite;
+		}
+
+		/* Gradient animation */
+		@keyframes gradientMove {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+
+		/* Common shape */
+		.shape {
+			position: absolute;
+			border-radius: 50%;
+			background: white;
+			opacity: 0.2;
+		}
+
+		/* Circle 1 */
+		.shape1 {
+			width: 100px;
+			height: 100px;
+			top: 10%;
+			left: -100px;
+			animation: move1 20s linear infinite;
+		}
+
+		/* Circle 2 */
+		.shape2 {
+			width: 150px;
+			height: 150px;
+			bottom: 10%;
+			right: -150px;
+			animation: move2 25s linear infinite;
+		}
+
+		/* Circle 3 */
+		.shape3 {
+			width: 200px;
+			height: 200px;
+			top: 50%;
+			left: -200px;
+			animation: move3 30s linear infinite;
+		}
+
+		/* Animations (direction berbeza) */
+		@keyframes move1 {
+			0% {
+				transform: translateX(0) translateY(0);
+			}
+
+			100% {
+				transform: translateX(120vw) translateY(50vh);
+			}
+		}
+
+		@keyframes move2 {
+			0% {
+				transform: translateX(0) translateY(0);
+			}
+
+			100% {
+				transform: translateX(-120vw) translateY(-40vh);
+			}
+		}
+
+		@keyframes move3 {
+			0% {
+				transform: translateX(0) translateY(0);
+			}
+
+			100% {
+				transform: translateX(130vw) translateY(-60vh);
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="shape shape1"></div>
+	<div class="shape shape2"></div>
+	<div class="shape shape3"></div>
+</body>
+
+</html>

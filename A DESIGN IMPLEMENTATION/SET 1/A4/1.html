@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mega Menu</title>
+	<link rel="stylesheet" href="style.css"><style>
+		/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    background: #2c3e50;
+}
+
+/* Menu */
+.menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu a {
+    display: block;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+}
+
+/* Active item */
+.menu a.active {
+    background: #3498db;
+}
+
+/* Mega Menu */
+.mega-menu {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100vw;
+
+    height: 300px;
+    background: white;
+
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+
+    /* hidden state */
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+
+    transition: all 0.4s ease;
+}
+
+/* Show on hover */
+.has-dropdown:hover .mega-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Column */
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.column h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.column a {
+    color: #555;
+    padding: 5px 0;
+    text-decoration: none;
+}
+
+.column a:hover {
+    color: #3498db;
+}
+	</style>
+</head>
+
+<body>
+
+	<nav class="navbar">
+		<ul class="menu">
+			<li><a href="#">Home</a></li>
+
+			<li class="has-dropdown">
+				<a href="#" class="active">Services</a>
+
+				<div class="mega-menu">
+					<div class="column">
+						<h3>Column 1</h3>
+						<a href="#">Link 1</a>
+						<a href="#">Link 2</a>
+						<a href="#">Link 3</a>
+						<a href="#">Link 4</a>
+						<a href="#">Link 5</a>
+					</div>
+
+					<div class="column">
+						<h3>Column 2</h3>
+						<a href="#">Link 1</a>
+						<a href="#">Link 2</a>
+						<a href="#">Link 3</a>
+						<a href="#">Link 4</a>
+						<a href="#">Link 5</a>
+					</div>
+
+					<div class="column">
+						<h3>Column 3</h3>
+						<a href="#">Link 1</a>
+						<a href="#">Link 2</a>
+						<a href="#">Link 3</a>
+						<a href="#">Link 4</a>
+						<a href="#">Link 5</a>
+					</div>
+				</div>
+			</li>
+
+			<li><a href="#">About</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+	</nav>
+
+</body>
+
+</html>

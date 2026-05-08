@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		/* center page */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eee;
+}
+
+/* container */
+.comparison {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
+}
+
+/* images */
+.comparison img {
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+}
+
+/* after image (top layer) */
+.after {
+    width: 50%; /* default middle */
+    overflow: hidden;
+}
+
+/* range input */
+input[type="range"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 5;
+}
+
+/* divider line */
+.divider {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: white;
+    z-index: 3;
+    transform: translateX(-50%);
+}
+
+/* handle circle */
+.handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: 3px solid #333;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+}
+	</style>
+</head>
+<body>
+	<div class="comparison">
+	
+		<img src="./87.jpg" class="before">
+	
+		<div class="after">
+			<img src="./88.jpg">
+		</div>
+	
+		<div class="divider"></div>
+		<div class="handle"></div>
+	
+		<input type="range" min="0" max="100" value="50">
+	
+	</div>
+</body>
+</html>

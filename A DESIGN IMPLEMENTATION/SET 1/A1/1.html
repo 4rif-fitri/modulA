@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.images{
+			width: 500px;
+			height: 500px;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 1fr 1fr;
+			gap: 20px;
+		}
+		.image{
+			height: 100%;
+			width: 100%;
+		}
+		.image > img{
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+			transition: all 0.5s ease-in-out;
+			filter: grayscale(100%) blur(3px);
+		}
+		.image > img:hover{
+			filter: grayscale(0%) blur(0px);
+			scale: 1.1;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="images">
+		<div class="image">
+			<img src="./87.jpg" alt="">
+		</div>
+		<div class="image">
+			<img src="./88.jpg" alt="">
+		</div>
+		<div class="image">
+			<img src="./89.jpg" alt="">
+		</div>
+		<div class="image">
+			<img src="./90.jpg" alt="">
+		</div>
+	</div>
+</body>
+
+</html>

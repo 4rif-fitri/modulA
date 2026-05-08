@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			height: 100vh;
+			background-color: lightblue;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.container{
+			background-color: #fff;
+			padding: 0.5rem;
+		}
+		table, tbody, tr, td{
+			border-collapse: collapse;
+		}
+		td{
+			padding: 1rem;
+		}
+		input{
+			padding: 0.5rem;
+		}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<table>
+			<caption>Temperature Unit Converter</caption>
+			<tr>
+				<td>
+					<label for="celsius">Celsius</label>
+				</td>
+				<td>
+					<input type="text" name="celsius" id="celsius">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="fahrenheit">Fahrenheit</label>
+				</td>
+				<td>
+					<input type="text" name="fahrenheit" id="fahrenheit">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="kelvin">Kelvin</label>
+				</td>
+				<td>
+					<input type="text" name="kelvin" id="kelvin">
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script>
+
+		let c
+		let f	
+		let k
+
+		document.querySelectorAll("input").forEach(inp => inp.addEventListener("keyup", e => {
+			
+			let value = e.target.value
+
+			if(isNaN(value)) return			
+			value = parseFloat(value)
+			
+			if(e.target.id == "celsius"){
+				c = value
+				f = ((value * (9/5)) + 32).toFixed(2)
+				k = (value + 273.15).toFixed(2)
+			} 
+			if (e.target.id == "fahrenheit") {
+				c = ((value - 32) * (5/9)).toFixed(2)
+				f = value
+				k = (c +  273.15)
+			}
+			if (e.target.id == "kelvin") {
+				c = (value - 273.15).toFixed(2)
+				f = ((c * (9 / 5)) + 32).toFixed(2)
+				k = value
+			}
+
+			document.getElementById("celsius").value = c
+			document.getElementById("fahrenheit").value = f
+			document.getElementById("kelvin").value = k
+		}))
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		/* Reset + center */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+/* Progress Circle */
+.progress {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    
+    /* animated value */
+    --value: 0;
+    
+    /* conic gradient (progress) */
+    background: conic-gradient(
+        #27ae60 calc(var(--value) * 1%),
+        #ecf0f1 0%
+    );
+
+    /* create hollow center (border 15px) */
+    mask: radial-gradient(farthest-side, transparent calc(100% - 15px), black 0);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 15px), black 0);
+
+    position: relative;
+
+    animation: progressAnim 2s forwards;
+}
+
+/* Text tengah */
+.progress::before {
+    content: "75%";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Animation dari 0% → 75% */
+@keyframes progressAnim {
+    from {
+        --value: 0;
+    }
+    to {
+        --value: 75;
+    }
+}
+	</style>
+</head>
+<body>
+	<div class="progress"></div>
+</body>
+</html>

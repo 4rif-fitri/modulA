@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: black;
+		}
+
+		.wave-container {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 150px;
+			overflow: hidden;
+			background: transparent;
+		}
+
+		.wave {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 200%;
+			/* Extra width for seamless looping */
+			height: 100%;
+			background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0 C300,120 900,0 1200,60 L1200,120 L0,120 Z" fill="white"/></svg>');
+			background-repeat: repeat-x;
+			background-size: 50% 100%;
+			transform: translate3d(0, 0, 0);
+		}
+
+		/* Layer 1 (Back) */
+		.wave1 {
+			background-color: rgba(52, 152, 219, 0.4);
+			animation: moveWave 15s linear infinite;
+			z-index: 1;
+		}
+
+		/* Layer 2 (Middle) */
+		.wave2 {
+			background-color: rgba(52, 152, 219, 0.6);
+			animation: moveWave 10s linear infinite;
+			z-index: 2;
+			opacity: 0.8;
+			bottom: 5px;
+			/* Slight offset for visibility */
+		}
+
+		/* Layer 3 (Front) */
+		.wave3 {
+			background-color: rgba(52, 152, 219, 0.8);
+			animation: moveWave 7s linear infinite;
+			z-index: 3;
+			bottom: 10px;
+		}
+
+		@keyframes moveWave {
+			0% {
+				transform: translateX(0);
+			}
+
+			100% {
+				transform: translateX(-50%);
+				/* Moves half the width for a smooth loop */
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wave-container">
+		<div class="wave wave1"></div>
+		<div class="wave wave2"></div>
+		<div class="wave wave3"></div>
+	</div>
+</body>
+
+</html>

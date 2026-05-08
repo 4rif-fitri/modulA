@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BMI Calculator</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			height: 100vh;
+			background-color: #eee;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+		}
+
+		table,
+		tr,
+		td {
+			border-collapse: collapse;
+		}
+
+		td {
+			padding: 1rem;
+		}
+
+		.container {
+			background-color: #fff;
+			padding: 0.5rem;
+		}
+
+		input {
+			padding: 0.5rem;
+		}
+
+		button {
+			padding: 0.5rem 1rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<table>
+			<tr>
+				<td>
+					<label for="weight">Weight(Kg)</label>
+				</td>
+				<td>
+					<input type="text" name="weight" id="weight">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="height">Height(cm)</label>
+				</td>
+				<td>
+					<input type="text" name="height" id="height">
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><button id="kira">Clac</button></td>
+			</tr>
+		</table>
+
+		<div id="result">
+			<center>
+				<h3 id="status"></h3>
+			</center>
+		</div>
+
+	</div>
+	<script>
+	let status = document.getElementById("status")
+
+		document.getElementById("kira").addEventListener("click", e => {
+			status.style.backgroundColor = "#fff"
+
+			let Weight = document.getElementById("weight").value.trim()
+			let Height = document.getElementById("height").value.trim()
+
+
+			if (Weight == "" || Height == "") {
+				status.textContent = Weight == "" ? "Enter Weight La" : "Enter Height La"
+				return
+			}
+			if (isNaN(Weight) || isNaN(Height)) {
+				status.textContent = isNaN(Weight) ? "Invalid Weight La" : "Invalid Height La"
+				return
+			}
+
+			Weight = parseFloat(Weight)
+			Height = parseFloat(Height)
+			// cm -> m
+			Height = Height / 100
+
+			let BMI = (Weight / (Math.pow(Height, 2))).toFixed(2)
+
+			if (BMI >= 30) {
+				status.textContent = "Obese"
+				status.style.backgroundColor = "#e74c3c"
+			} else if (BMI >= 25) {
+				status.textContent = "Overweight"
+				status.style.backgroundColor = "#f39c12"
+
+			} else if (BMI >= 18.5) {
+				status.textContent = "Normal"
+				status.style.backgroundColor = "#2ecc71"
+			} else {
+				status.textContent = "Underweight"
+				status.style.backgroundColor = "#3498db"
+			}
+
+		})
+	</script>
+</body>
+
+</html>

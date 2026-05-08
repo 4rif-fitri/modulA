@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			height: 100vh;
+			background-color: lightgoldenrodyellow;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		main {
+			width: 800px;
+			height: 500px;
+			background-color: #fff;
+		}
+
+		.imgGroup {
+			height: 100%;
+			min-width: 100%;
+			max-width: auto;
+			display: flex;
+			overflow: hidden;
+		}
+
+		.imgGroup img {
+			min-width: 800px;
+		}
+
+		.counter>h4 {
+			text-align: center;
+		}
+
+		.btnGroup {
+			display: grid;
+			gap: 1rem;
+			padding: 1rem;
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.btnGroup>button {
+			height: 2rem;
+		}
+		.thumails{
+			height: 100px;
+			display: flex;
+			justify-content: center;
+			gap: 0.5rem;
+			background-color: lightblue;
+		}
+		.thumails > img{
+			height: 100%;
+			width: 150px;
+		}
+		.active{
+			border: 5px solid black;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<main>
+			<div class="imgGroup">
+				<img src="./87.jpg" alt="">
+				<img src="./88.jpg" alt="">
+				<img src="./89.jpg" alt="">
+				<img src="./87.jpg" alt="">
+				<img src="./90.jpg" alt="">
+			</div>
+		</main>
+		<div class="counter">
+			<h4>1 of 10</h4>
+		</div>
+		<div class="thumails">
+			<img class="active" src="./87.jpg" alt="">
+			<img src="./88.jpg" alt="">
+			<img src="./89.jpg" alt="">
+			<img src="./87.jpg" alt="">
+			<img src="./90.jpg" alt="">
+		</div>
+		<div class="btnGroup">
+			<button id="previous">Previous button (◄)</button>
+			<button id="next">Next button (►)</button>
+		</div>
+	</div>
+	<script>
+		let currentImg = 0
+		let totalSlide = document.querySelectorAll(".imgGroup img").length
+		let imgGroup = document.querySelector(".imgGroup")
+		let imgs = document.querySelectorAll(".imgGroup img")
+		let imgWidth = imgs[0].getBoundingClientRect().width;
+		let counter = document.querySelector(".counter h4")
+		let thummails = document.querySelectorAll(".thumails img")
+		counter.textContent = `${currentImg + 1} of ${totalSlide}`
+
+		document.querySelectorAll(".thumails img").forEach((img, index) => {
+			img.addEventListener("click", e => {
+				thummails.forEach(img => {
+					img.classList.remove("active")
+				})
+				thummails[index].classList.add("active")
+				currentImg = index
+				imgGroup.scrollTo({
+					left: index * imgWidth,
+					behavior: "smooth"
+				})
+			})
+		})
+
+		let slide = (idx) => {
+
+			currentImg += idx
+			if (currentImg == -1) {
+				currentImg = 0 
+				document.getElementById("previous").setAttribute("disable",true)
+
+			}
+			else if (currentImg > totalSlide - 1) currentImg = 0
+
+			counter.textContent = `${currentImg + 1} of ${totalSlide}`
+
+			thummails.forEach(img => {
+				img.classList.remove("active")
+			})
+			thummails[currentImg].classList.add("active")
+
+			console.log(currentImg * imgWidth);
+			imgGroup.scrollTo({
+				left: currentImg * imgWidth,
+				behavior: "smooth"
+			})
+
+		}
+
+
+
+		document.getElementById("previous").addEventListener("click", () => slide(-1))
+		document.getElementById("next").addEventListener("click", () => slide(1))
+	</script>
+</body>
+
+</html>
