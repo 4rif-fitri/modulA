@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Weather Dashboard</title>
+
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		body {
+			background: #f2f2f2;
+			padding: 2rem;
+		}
+
+		h1 {
+			margin-bottom: 1rem;
+		}
+
+		.controls {
+			display: flex;
+			gap: 1rem;
+			margin-bottom: 2rem;
+			flex-wrap: wrap;
+		}
+
+		input,
+		select,
+		button {
+			padding: 0.7rem 1rem;
+			border: none;
+			border-radius: 8px;
+		}
+
+		button {
+			cursor: pointer;
+			background: #333;
+			color: white;
+		}
+
+		.container {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 1rem;
+		}
+
+		.card {
+			background: white;
+			padding: 1.5rem;
+			border-radius: 15px;
+			box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+			display: flex;
+			flex-direction: column;
+			gap: 0.7rem;
+
+			transition: 0.2s;
+		}
+
+		.card:hover {
+			transform: translateY(-5px);
+		}
+
+		.current {
+			border: 3px solid dodgerblue;
+		}
+
+		.temp {
+			font-size: 2rem;
+			font-weight: bold;
+		}
+
+		.icon {
+			font-size: 3rem;
+		}
+
+		.info {
+			color: #555;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>Weather Dashboard</h1>
+
+	<div class="controls">
+
+		<input type="text" id="search" placeholder="Search city">
+
+		<button id="toggleUnit">
+			Switch to °F
+		</button>
+
+		<select id="sort">
+			<option value="name">Sort A-Z</option>
+			<option value="temp">Sort Temperature</option>
+		</select>
+
+	</div>
+
+	<div class="container" id="container"></div>
+
+	<script>
+
+		let isCelsius = true
+
+		let cities = [
+
+			{
+				id: 1,
+				name: "Kuala Lumpur",
+				temperature: 31,
+				condition: "Sunny",
+				humidity: 72,
+				windSpeed: 12,
+				isCurrent: true
+			},
+
+			{
+				id: 2,
+				name: "Melaka",
+				temperature: 29,
+				condition: "Cloudy",
+				humidity: 78,
+				windSpeed: 8,
+				isCurrent: false
+			},
+
+			{
+				id: 3,
+				name: "Tokyo",
+				temperature: 21,
+				condition: "Rainy",
+				humidity: 66,
+				windSpeed: 15,
+				isCurrent: false
+			},
+
+			{
+				id: 4,
+				name: "London",
+				temperature: 18,
+				condition: "Cloudy",
+				humidity: 70,
+				windSpeed: 10,
+				isCurrent: false
+			},
+
+			{
+				id: 5,
+				name: "Dubai",
+				temperature: 39,
+				condition: "Sunny",
+				humidity: 40,
+				windSpeed: 9,
+				isCurrent: false
+			},
+
+			{
+				id: 6,
+				name: "Sydney",
+				temperature: 17,
+				condition: "Rainy",
+				humidity: 82,
+				windSpeed: 18,
+				isCurrent: false
+			}
+
+		]
+
+		let container = document.getElementById("container")
+
+		let getIcon = condition => {
+
+			if (condition === "Sunny") return "☀️"
+			if (condition === "Cloudy") return "☁️"
+			if (condition === "Rainy") return "🌧️"
+
+			return "🌍"
+		}
+
+		let convertTemp = temp => {
+
+			if (isCelsius) return `${temp} °C`
+
+			return `${((temp * 9/5) + 32).toFixed(1)} °F`
+		}
+
+		let render = datas => {
+
+			container.innerHTML = ""
+
+			datas.forEach(city => {
+
+				let div = document.createElement("div")
+
+				div.classList.add("card")
+
+				if (city.isCurrent) {
+					div.classList.add("current")
+				}
+
+				div.innerHTML = `
+				
+					<div class="icon">
+						${getIcon(city.condition)}
+					</div>
+
+					<h2>${city.name}</h2>
+
+					<div class="temp">
+						${convertTemp(city.temperature)}
+					</div>
+
+					<div class="info">
+						Condition: ${city.condition}
+					</div>
+
+					<div class="info">
+						Humidity: ${city.humidity}%
+					</div>
+
+					<div class="info">
+						Wind: ${city.windSpeed} km/h
+					</div>
+
+				`
+
+				container.appendChild(div)
+
+			})
+
+			localStorage.setItem("weatherCities", JSON.stringify(cities))
+		}
+
+		render(cities)
+
+		document.getElementById("toggleUnit")
+		.addEventListener("click", () => {
+
+			isCelsius = !isCelsius
+
+			document.getElementById("toggleUnit").textContent =
+				isCelsius
+				? "Switch to °F"
+				: "Switch to °C"
+
+			render(cities)
+
+		})
+
+		document.getElementById("search")
+		.addEventListener("input", e => {
+
+			let value = e.target.value.toLowerCase()
+
+			let filtered = cities.filter(city => {
+
+				return city.name.toLowerCase()
+				.includes(value)
+
+			})
+
+			render(filtered)
+
+		})
+
+		document.getElementById("sort")
+		.addEventListener("change", e => {
+
+			if (e.target.value === "name") {
+
+				cities.sort((a,b) => {
+
+					return a.name.localeCompare(b.name)
+
+				})
+
+			}
+
+			else {
+
+				cities.sort((a,b) => {
+
+					return b.temperature - a.temperature
+
+				})
+
+			}
+
+			render(cities)
+
+		})
+
+		setInterval(() => {
+
+			cities.forEach(city => {
+
+				let random =
+					Math.floor(Math.random() * 5) - 2
+
+				city.temperature += random
+
+			})
+
+			render(cities)
+
+		}, 3000)
+
+		let saved =
+			JSON.parse(localStorage.getItem("weatherCities"))
+
+		if (saved) {
+
+			cities = saved
+
+			render(cities)
+
+		}
+
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Filterable Product Grid</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+	<nav>
+		<div>
+		<h1>Filterable Product Grid</h1>
+		<div class="filterControl">
+				<input type="text" name="filterText" id="filterText" placeholder="Search product...">
+				<select name="catagory" id="catagory">
+					<option value="All">All</option>
+					<option value="Electronics">Electronics</option>
+					<option value="Clothing">Clothing</option>
+					<option value="Books">Books</option>
+					<option value="Sports">Sports</option>
+				</select>
+				<button id="btnReset">Clear Filters</button>
+			</div>
+		</div>
+		<p id="status">Showing 12 of 12 products</p>
+	</nav>
+	<main>
+		<div class="card" data-type="Electronics">
+			<div class="img" style="background-image: url('./100.jpg');"></div>
+			<article>
+				<h3>Laptop Pro</h3>
+				<span>Electronics</span>
+				<h2>RM 3500.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+		<div class="card" data-type="Electronics">
+			<div class="img" style="background-image: url('./99.jpg');"></div>
+			<article>
+				<h3>Wireless Headphones</h3>
+				<span>Electronics</span>
+				<h2>RM 450.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+		<div class="card" data-type="Electronics">
+			<div class="img" style="background-image: url('./98.jpg');"></div>
+			<article>
+				<h3>Smart Watch</h3>
+				<span>Electronics</span>
+				<h2>RM 899.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+
+		<div class="card" data-type="Clothing">
+			<div class="img" style="background-image: url('./97.jpg');"></div>
+			<article>
+				<h3>Casual T-Shirt</h3>
+				<span>Clothing</span>
+				<h2>RM 59.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+		<div class="card" data-type="Clothing">
+			<div class="img" style="background-image: url('./96.jpg');"></div>
+			<article>
+				<h3>Denim Jacket</h3>
+				<span>Clothing</span>
+				<h2>RM 149.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+		<div class="card" data-type="Clothing">
+			<div class="img" style="background-image: url('./95.jpg');"></div>
+			<article>
+				<h3>Running Shoes</h3>
+				<span>Clothing</span>
+				<h2>RM 45.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+
+		<div class="card" data-type="Books">
+			<div class="img" style="background-image: url('./94.jpg');"></div>
+			<article>
+				<h3>JavaScript Guide</h3>
+				<span>Books</span>
+				<h2>RM 89.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+		<div class="card" data-type="Books">
+			<div class="img" style="background-image: url('./93.jpg');"></div>
+			<article>
+				<h3>CSS Mastery</h3>
+				<span>Books</span>
+				<h2>RM 75.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+		<div class="card" data-type="Books">
+			<div class="img" style="background-image: url('./92.jpg');"></div>
+			<article>
+				<h3>HTML Basics</h3>
+				<span>Books</span>
+				<h2>RM 45.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+
+		<div class="card" data-type="Sports">
+			<div class="img" style="background-image: url('./91.jpg');"></div>
+			<article>
+				<h3>Football</h3>
+				<span>Sports</span>
+				<h2>RM 120.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+		<div class="card" data-type="Sports">
+			<div class="img" style="background-image: url('./90.jpg');"></div>
+			<article>
+				<h3>Basketball Hoop</h3>
+				<span>Sports</span>
+				<h2>RM 399.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+		<div class="card" data-type="Sports">
+			<div class="img" style="background-image: url('./89.jpg');"></div>
+			<article>
+				<h3>Yoga Mat</h3>
+				<span>Sports</span>
+				<h2>RM 65.00</h2>
+				<button>Add to Cart</button>
+			</article>
+		</div>
+
+	</main>
+
+	<script src="./app.js"></script>
+</body>
+
+</html>

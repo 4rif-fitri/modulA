@@ -1,0 +1,131 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	background-color: #eee;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+	padding: 1rem;
+	width: 100%;
+	height: auto;
+}
+
+main {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	padding: 1rem;
+	gap: 1rem;
+}
+
+@media screen and (max-width:800px) {
+	main {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+@media screen and (max-width:500px) {
+	main {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+.card {
+	background-color: #fff;
+	width: 100%;
+	border-radius: 14px;
+	box-shadow: 0 1px 5px black;
+	/* animation: fadeOut 0.5s forwards; */
+}
+
+.card .img {
+	width: 100%;
+	height: 13.5rem;
+	background-position: center;
+	background-size: cover;
+	border-top-left-radius: 14px;
+	border-top-right-radius: 14px;
+}
+.card > article{
+	display: flex;
+	flex-direction: column;
+	gap: 0.8rem;
+	padding: 1rem;
+}
+.card span{
+	font-size: 0.8rem;
+	background-color: #eee;
+	width: max-content;
+	padding: 0.5rem;
+	border-radius: 5rem;
+}
+.card h2{
+	color: green;
+}
+.card>article > button{
+	all: unset;
+	width: 100%;
+	background-color: blue;
+	text-align: center;
+	color: #fff;
+	padding: .5rem 0;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.card>article>button:hover {
+	background-color: rgb(0, 0, 184);
+}
+nav{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 1rem;
+}
+.filterControl{
+	height: 2rem;
+	display: flex;
+	gap: 0.5rem;
+}
+.filterControl > *{
+	height: 100%;
+	padding: 0.5rem;
+}
+.filterControl > button{
+	all: unset;
+	border-radius: 5px;
+	padding: 0.5rem 1rem;
+	background-color: #000;
+	color: #fff;
+}
+nav h1{
+	text-align: center;
+}
+.filterControl>select,
+.filterControl>input{
+	width: 10rem;
+}
+
+@keyframes fadeOut {
+	0%{
+		opacity: 100%;
+	}
+	100%{
+		opacity: 0%;
+		display: none;
+	}
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0%;
+	}
+	
+	100% {
+		opacity: 100%;
+		display: block;
+	}
+}

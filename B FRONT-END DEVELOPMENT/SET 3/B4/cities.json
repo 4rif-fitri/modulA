@@ -1,0 +1,203 @@
+```json id="kj3p8f"[
+	{
+		"id": 1,
+		"name": "Kuala Lumpur",
+		"country": "Malaysia",
+		"temperature": 31,
+		"condition": "Sunny",
+		"humidity": 72,
+		"windSpeed": 12,
+		"isCurrent": true
+	},
+	{
+		"id": 2,
+		"name": "Melaka",
+		"country": "Malaysia",
+		"temperature": 30,
+		"condition": "Cloudy",
+		"humidity": 78,
+		"windSpeed": 9,
+		"isCurrent": false
+	},
+	{
+		"id": 3,
+		"name": "Johor Bahru",
+		"country": "Malaysia",
+		"temperature": 29,
+		"condition": "Rainy",
+		"humidity": 84,
+		"windSpeed": 15,
+		"isCurrent": false
+	},
+	{
+		"id": 4,
+		"name": "Penang",
+		"country": "Malaysia",
+		"temperature": 30,
+		"condition": "Sunny",
+		"humidity": 70,
+		"windSpeed": 10,
+		"isCurrent": false
+	},
+	{
+		"id": 5,
+		"name": "Ipoh",
+		"country": "Malaysia",
+		"temperature": 28,
+		"condition": "Cloudy",
+		"humidity": 76,
+		"windSpeed": 7,
+		"isCurrent": false
+	},
+	{
+		"id": 6,
+		"name": "Kuching",
+		"country": "Malaysia",
+		"temperature": 27,
+		"condition": "Rainy",
+		"humidity": 88,
+		"windSpeed": 14,
+		"isCurrent": false
+	},
+	{
+		"id": 7,
+		"name": "Kota Kinabalu",
+		"country": "Malaysia",
+		"temperature": 29,
+		"condition": "Sunny",
+		"humidity": 75,
+		"windSpeed": 11,
+		"isCurrent": false
+	},
+	{
+		"id": 8,
+		"name": "Singapore",
+		"country": "Singapore",
+		"temperature": 32,
+		"condition": "Cloudy",
+		"humidity": 80,
+		"windSpeed": 13,
+		"isCurrent": false
+	},
+	{
+		"id": 9,
+		"name": "Bangkok",
+		"country": "Thailand",
+		"temperature": 34,
+		"condition": "Sunny",
+		"humidity": 68,
+		"windSpeed": 10,
+		"isCurrent": false
+	},
+	{
+		"id": 10,
+		"name": "Jakarta",
+		"country": "Indonesia",
+		"temperature": 33,
+		"condition": "Rainy",
+		"humidity": 85,
+		"windSpeed": 16,
+		"isCurrent": false
+	},
+	{
+		"id": 11,
+		"name": "Tokyo",
+		"country": "Japan",
+		"temperature": 22,
+		"condition": "Cloudy",
+		"humidity": 65,
+		"windSpeed": 18,
+		"isCurrent": false
+	},
+	{
+		"id": 12,
+		"name": "Seoul",
+		"country": "South Korea",
+		"temperature": 19,
+		"condition": "Rainy",
+		"humidity": 71,
+		"windSpeed": 20,
+		"isCurrent": false
+	},
+	{
+		"id": 13,
+		"name": "Beijing",
+		"country": "China",
+		"temperature": 25,
+		"condition": "Sunny",
+		"humidity": 60,
+		"windSpeed": 14,
+		"isCurrent": false
+	},
+	{
+		"id": 14,
+		"name": "Sydney",
+		"country": "Australia",
+		"temperature": 18,
+		"condition": "Cloudy",
+		"humidity": 58,
+		"windSpeed": 17,
+		"isCurrent": false
+	},
+	{
+		"id": 15,
+		"name": "London",
+		"country": "United Kingdom",
+		"temperature": 16,
+		"condition": "Rainy",
+		"humidity": 82,
+		"windSpeed": 22,
+		"isCurrent": false
+	},
+	{
+		"id": 16,
+		"name": "Paris",
+		"country": "France",
+		"temperature": 20,
+		"condition": "Sunny",
+		"humidity": 63,
+		"windSpeed": 12,
+		"isCurrent": false
+	},
+	{
+		"id": 17,
+		"name": "New York",
+		"country": "USA",
+		"temperature": 24,
+		"condition": "Cloudy",
+		"humidity": 67,
+		"windSpeed": 19,
+		"isCurrent": false
+	},
+	{
+		"id": 18,
+		"name": "Dubai",
+		"country": "UAE",
+		"temperature": 39,
+		"condition": "Sunny",
+		"humidity": 40,
+		"windSpeed": 9,
+		"isCurrent": false
+	},
+	{
+		"id": 19,
+		"name": "Moscow",
+		"country": "Russia",
+		"temperature": 12,
+		"condition": "Snowy",
+		"humidity": 73,
+		"windSpeed": 21,
+		"isCurrent": false
+	},
+	{
+		"id": 20,
+		"name": "Toronto",
+		"country": "Canada",
+		"temperature": 15,
+		"condition": "Cloudy",
+		"humidity": 66,
+		"windSpeed": 18,
+		"isCurrent": false
+	}
+]
+```
