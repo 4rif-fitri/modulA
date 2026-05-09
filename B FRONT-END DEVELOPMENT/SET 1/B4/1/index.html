@@ -1,11 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Memory Card Matching Game</title>
+	<link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-	
+	<h1 style="background-color: white; padding: 1rem 3rem;">Memory Card Matching Game</h1>
+	<br><br>
+	<main>
+		<section id="cardContainer">
+
+			<label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./100.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label>
+
+			<label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./100.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./99.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./99.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./98.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./98.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./97.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./97.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./96.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./96.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./95.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./95.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./94.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./94.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./93.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label><label class="card">
+				<input type="checkbox" hidden>
+				<div class="innerCard">
+					<div class="back" style="background-image: url('./93.jpg');">
+					</div>
+					<div class="front">
+						<h3>Front</h3>
+					</div>
+				</div>
+			</label>
+		</section>
+
+		<section id="controlContainer">
+			<h3>Track</h3>
+
+			<h2>Moves count: <span id="countMove"></span></h2>
+			<h2>Time elapsed: <span id="countTime"></span></h2>
+			<h2>Pairs found: <span id="countPair"></span></h2>
+			<button id="reset" class="red">Reset</button>
+		</section>
+	</main>
+	<script src="./app.js"></script>
 </body>
+
 </html>
