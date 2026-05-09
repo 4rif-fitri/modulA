@@ -81,8 +81,9 @@ h3:nth-child(11) {
 }
 .arrow{
 	position: absolute;
-	transform-origin: top;
+	transform-origin: bottom;
 	transition: all 0.1s ease-in-out;
+	bottom: 0;
 }
 .long{
 	height: 120px;
