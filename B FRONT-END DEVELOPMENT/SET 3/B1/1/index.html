@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tip Calculator</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+	<main>
+		<center>
+			<h1>Tip Calculator</h1>
+		</center>
+		<br>
+		<hr>
+		<br>
+		<section>
+			<h3>Input fields</h3>
+			<table>
+				<tr>
+					<td>
+						<label for="bil">Bil Amount: </label>
+					</td>
+					<td>
+						<input type="number" name="bil" id="bil">
+						<span style="color: red; display: none;">Bill must not negative</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="tipPercentage">Tip percentage: </label>
+					</td>
+					<td>
+						<select name="tipPercentage" id="tipPercentage">
+							<option value="15">15%</option>
+							<option value="18">18%</option>
+							<option value="20">20%</option>
+							<option value="Custom">Custom</option>
+						</select>
+						<input placeholder="custom %" type="number" name="customTipPercentage"
+							id="customTipPercentage" max="100">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="numberOfPeople">Number of people: </label>
+					</td>
+					<td>
+						<input type="number" name="numberOfPeople" id="numberOfPeople">
+					</td>
+				</tr>
+			</table>
+		</section>
+		<br>
+		<hr>
+		<br>
+		<section id="output">
+			<h4>Final Calculation</h4>
+			<table>
+				<tr>
+					<td>
+						<h4>Tip amount</h4>
+					</td>
+					<td>
+						<h4 id="TipAmount"></h4>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h4>Total bill (bill + tip)</h4>
+					</td>
+					<td>
+						<h4 id="TotalBill"></h4>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h4>Amount per person</h4>
+					</td>
+					<td>
+						<h4 id="AmountPerPerson"></h4>
+					</td>
+				</tr>
+			</table>
+		</section>
+	</main>
+	<script src="./app.js"></script>
+</body>
+
+</html>
