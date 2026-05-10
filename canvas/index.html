@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Bar Graph Canvas</title>
+	<style>
+		canvas {
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+
+<body>
+
+	<canvas id="myCanvas" width="600" height="400"></canvas>
+
+	<script>
+		const canvas = document.getElementById("myCanvas");
+		const ctx = canvas.getContext("2d");
+
+		// Data contoh
+		const data = [50, 120, 80, 150, 100];
+		const labels = ["A", "B", "C", "D", "E"];
+
+		// Setting graph
+		const barWidth = 60;
+		const gap = 30;
+		const baseY = 350;
+		const maxHeight = 300;
+
+		// Cari nilai maksimum untuk scaling
+		const maxValue = Math.max(...data);
+
+		// Lukis paksi X
+		ctx.beginPath();
+		ctx.moveTo(10, baseY);
+		ctx.lineTo(550, baseY);
+		ctx.stroke();
+
+		// Lukis bar
+		data.forEach((value, index) => {
+			const x = 70 + index * (barWidth + gap);
+
+			// skala tinggi
+			const height = (value / maxValue) * maxHeight;
+			const y = baseY - height;
+
+			// bar
+			ctx.fillStyle = "steelblue";
+			ctx.fillRect(x, y, barWidth, height);
+
+			// label bawah
+			ctx.fillStyle = "black";
+			ctx.fillText(labels[index], x + 20, baseY + 15);
+
+			// nilai atas bar
+			ctx.fillText(value, x + 15, y - 5);
+		});
+	</script>
+
+</body>
+
+</html>

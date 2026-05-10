@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Expense Tracker</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: Arial, sans-serif;
+		}
+
+		body {
+			background: #f3f4f6;
+			padding: 20px;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: auto;
+		}
+
+		h1 {
+			margin-bottom: 20px;
+		}
+
+		.card {
+			background: white;
+			padding: 20px;
+			border-radius: 10px;
+			margin-bottom: 20px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+		}
+
+		form {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+			gap: 10px;
+		}
+
+		input,
+		select,
+		button {
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 6px;
+		}
+
+		button {
+			cursor: pointer;
+			background: #111827;
+			color: white;
+			border: none;
+		}
+
+		button:hover {
+			opacity: .9;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		th,
+		td {
+			padding: 12px;
+			border-bottom: 1px solid #ddd;
+			text-align: left;
+		}
+
+		th {
+			background: #111827;
+			color: white;
+		}
+
+		.actions {
+			display: flex;
+			gap: 5px;
+		}
+
+		.total {
+			font-size: 24px;
+			font-weight: bold;
+		}
+
+		.filters {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+			gap: 10px;
+		}
+
+		canvas {
+			max-width: 100%;
+			margin-top: 20px;
+		}
+
+		.summary {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+			gap: 10px;
+			margin-top: 20px;
+		}
+
+		.summary-box {
+			background: #f9fafb;
+			padding: 15px;
+			border-radius: 8px;
+		}
+
+		.editing {
+			background: #fef3c7;
+		}
+
+		@media(max-width:700px) {
+			table {
+				font-size: 14px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<h1>Expense Tracker</h1>
+
+		<div class="card">
+			<h2>Add Expense</h2>
+
+			<form id="expenseForm">
+
+				<input type="text" id="description" placeholder="Description" required>
+
+				<input type="number" id="amount" placeholder="Amount" step="0.01" required>
+
+				<select id="category" required>
+					<option value="">Select Category</option>
+					<option>Food</option>
+					<option>Transport</option>
+					<option>Shopping</option>
+					<option>Bills</option>
+					<option>Other</option>
+				</select>
+
+				<input type="date" id="date" required>
+
+				<button>Add Expense</button>
+
+			</form>
+		</div>
+
+		<div class="card">
+			<h2>Filters</h2>
+
+			<div class="filters">
+
+				<select id="filterCategory">
+					<option value="All">All Categories</option>
+					<option>Food</option>
+					<option>Transport</option>
+					<option>Shopping</option>
+					<option>Bills</option>
+					<option>Other</option>
+				</select>
+
+				<input type="date" id="startDate">
+				<input type="date" id="endDate">
+
+				<button id="exportBtn">Export CSV</button>
+
+			</div>
+		</div>
+
+		<div class="card">
+			<h2>Total Spent</h2>
+			<div class="total" id="grandTotal">RM 0.00</div>
+
+			<canvas id="chart" width="700" height="350"></canvas>
+
+			<div class="summary" id="summary"></div>
+		</div>
+
+		<div class="card">
+			<h2>Expense List</h2>
+
+			<table>
+
+				<thead>
+					<tr>
+						<th>Description</th>
+						<th>Amount</th>
+						<th>Category</th>
+						<th>Date</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+
+				<tbody id="expenseList"></tbody>
+
+			</table>
+
+		</div>
+
+	</div>
+
+	<script>
+
+		let expenses = JSON.parse(localStorage.getItem("expenses")) || []
+
+		const expenseForm = document.getElementById("expenseForm")
+		const expenseList = document.getElementById("expenseList")
+		const grandTotal = document.getElementById("grandTotal")
+		const chart = document.getElementById("chart")
+		const ctx = chart.getContext("2d")
+		const summary = document.getElementById("summary")
+
+		const filterCategory = document.getElementById("filterCategory")
+		const startDate = document.getElementById("startDate")
+		const endDate = document.getElementById("endDate")
+
+		const categories = ["Food", "Transport", "Shopping", "Bills", "Other"]
+
+		expenseForm.addEventListener("submit", e => {
+			e.preventDefault()
+
+			const expense = {
+				id: Date.now(),
+				description: description.value,
+				amount: Number(amount.value),
+				category: category.value,
+				date: date.value
+			}
+
+			expenses.push(expense)
+
+			saveData()
+			expenseForm.reset()
+			render()
+		})
+
+		function saveData() {
+			localStorage.setItem("expenses", JSON.stringify(expenses))
+		}
+
+		function render() {
+
+			let filtered = [...expenses]
+
+			if (filterCategory.value != "All") {
+				filtered = filtered.filter(e => e.category == filterCategory.value)
+			}
+
+			if (startDate.value) {
+				filtered = filtered.filter(e => e.date >= startDate.value)
+			}
+
+			if (endDate.value) {
+				filtered = filtered.filter(e => e.date <= endDate.value)
+			}
+
+			filtered.sort((a, b) => new Date(b.date) - new Date(a.date))
+
+			expenseList.innerHTML = ""
+
+			filtered.forEach(expense => {
+
+				const tr = document.createElement("tr")
+
+				tr.innerHTML = `
+					<td>${expense.description}</td>
+					<td>RM ${expense.amount.toFixed(2)}</td>
+					<td>${expense.category}</td>
+					<td>${expense.date}</td>
+					<td class="actions">
+						<button onclick="editExpense(${expense.id})">Edit</button>
+						<button onclick="deleteExpense(${expense.id})">Delete</button>
+					</td>
+				`
+
+				expenseList.appendChild(tr)
+
+			})
+
+			updateTotals(filtered)
+			drawChart(filtered)
+			renderMonthlySummary(filtered)
+		}
+
+		function updateTotals(data) {
+
+			const total = data.reduce((sum, e) => sum + e.amount, 0)
+
+			grandTotal.textContent = `RM ${total.toFixed(2)}`
+		}
+
+		function drawChart(data) {
+
+			ctx.clearRect(0, 0, chart.width, chart.height)
+
+			const totals = {}
+
+			categories.forEach(cat => totals[cat] = 0)
+
+			data.forEach(e => {
+				totals[e.category] += e.amount
+			})
+
+			const max = Math.max(...Object.values(totals), 1)
+
+			const barWidth = 80
+			const gap = 40
+
+			categories.forEach((cat, index) => {
+
+				const value = totals[cat]
+				const height = (value / max) * 250
+
+				const x = 60 + index * (barWidth + gap)
+				const y = 300 - height
+
+				ctx.fillStyle = `hsl(${index * 70},70%,60%)`
+				ctx.fillRect(x, y, barWidth, height)
+
+				ctx.fillStyle = "#000"
+				ctx.fillText(cat, x + 10, 320)
+				ctx.fillText("RM " + value.toFixed(0), x + 5, y - 10)
+
+			})
+		}
+
+		function renderMonthlySummary(data) {
+
+			summary.innerHTML = ""
+
+			const monthly = {}
+
+			data.forEach(e => {
+
+				const month = e.date.slice(0, 7)
+
+				if (!monthly[month]) {
+					monthly[month] = {
+						total: 0
+					}
+
+					categories.forEach(cat => {
+						monthly[month][cat] = 0
+					})
+				}
+
+				monthly[month].total += e.amount
+				monthly[month][e.category] += e.amount
+
+			})
+
+			Object.keys(monthly).sort().reverse().forEach(month => {
+
+				const div = document.createElement("div")
+				div.className = "summary-box"
+
+				let html = `
+					<h3>${month}</h3>
+					<p><strong>Total:</strong> RM ${monthly[month].total.toFixed(2)}</p>
+				`
+
+				categories.forEach(cat => {
+					html += `<p>${cat}: RM ${monthly[month][cat].toFixed(2)}</p>`
+				})
+
+				div.innerHTML = html
+
+				summary.appendChild(div)
+
+			})
+		}
+
+		function deleteExpense(id) {
+
+			expenses = expenses.filter(e => e.id != id)
+
+			saveData()
+			render()
+		}
+
+		function editExpense(id) {
+
+			const row = [...expenseList.children].find(r =>
+				r.querySelector("button").getAttribute("onclick").includes(id)
+			)
+
+			const expense = expenses.find(e => e.id == id)
+
+			row.classList.add("editing")
+
+			row.innerHTML = `
+				<td><input value="${expense.description}" id="d${id}"></td>
+				<td><input type="number" value="${expense.amount}" id="a${id}"></td>
+				<td>
+					<select id="c${id}">
+						${categories.map(cat =>
+				`<option ${cat == expense.category ? "selected" : ""}>${cat}</option>`
+			).join("")}
+					</select>
+				</td>
+				<td><input type="date" value="${expense.date}" id="date${id}"></td>
+				<td>
+					<button onclick="saveEdit(${id})">Save</button>
+				</td>
+			`
+		}
+
+		function saveEdit(id) {
+
+			const expense = expenses.find(e => e.id == id)
+
+			expense.description = document.getElementById(`d${id}`).value
+			expense.amount = Number(document.getElementById(`a${id}`).value)
+			expense.category = document.getElementById(`c${id}`).value
+			expense.date = document.getElementById(`date${id}`).value
+
+			saveData()
+			render()
+		}
+
+		filterCategory.addEventListener("change", render)
+		startDate.addEventListener("change", render)
+		endDate.addEventListener("change", render)
+
+		document.getElementById("exportBtn").addEventListener("click", () => {
+
+			let csv = "Description,Amount,Category,Date\n"
+
+			expenses.forEach(e => {
+				csv += `${e.description},${e.amount},${e.category},${e.date}\n`
+			})
+
+			const blob = new Blob([csv], { type: "text/csv" })
+
+			const a = document.createElement("a")
+
+			a.href = URL.createObjectURL(blob)
+			a.download = "expenses.csv"
+
+			a.click()
+		})
+
+		render()
+
+	</script>
+
+</body>
+
+</html>

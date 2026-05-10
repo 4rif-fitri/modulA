@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body{
+			background-color: #eee;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		canvas{
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 1px 2px black;
+		}
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+
+	<script>
+		let canvas = document.querySelector("canvas")
+		let ctx = canvas.getContext("2d")
+		canvas.width = 600
+		canvas.height = 400
+
+		let centerX =  350 / 2
+		let centerY = 400 / 2
+
+		let datas = [10,20,30,40,50,60]
+		let students = [
+			"Student A",
+			"Student B",
+			"Student C",
+			"Student D",
+			"Student E",
+			"Student F",
+		]
+		let colors = [
+			"red",
+			"lightcoral",
+			"blue",
+			"navy",
+			"lightblue",
+			"skyblue"
+		]
+		let total = datas.reduce((acc,curr) => acc + curr,0) 
+		let radius = 150
+		let startAngle = 0
+
+		let lagendX = 350
+		let lagendY = 50
+
+		datas.forEach((data,index) => {
+			let slideAngle = (data / total) * Math.PI * 2
+			ctx.beginPath()
+			ctx.fillStyle = colors[index]
+			ctx.moveTo(centerX,centerY)
+			ctx.arc(centerX,centerY,radius,startAngle, startAngle + slideAngle)
+			ctx.closePath()
+			ctx.fill()
+			ctx.strokeStyle = "#000"
+			ctx.lineWidth = 2
+			ctx.stroke()
+
+			let midAngle = startAngle + slideAngle / 2
+			let persentage = `${((data / total) * 100).toFixed(1)}%`
+			let x = centerX + Math.cos(midAngle) * 90
+			let y = centerY + Math.sin(midAngle) * 90
+			
+			ctx.font = "bold 1rem arial"
+
+			ctx.strokeStyle = "#fff"
+			ctx.strokeText(persentage, x - 10, y + 5)
+			startAngle += slideAngle
+
+			ctx.fillStyle = "#000"
+			ctx.fillText(persentage,x - 10,y + 5)
+
+			ctx.fillStyle = colors[index]
+			ctx.fillRect(lagendX,lagendY,30,30)
+
+			ctx.font = "bold 1rem arial"
+			ctx.fillText(students[index], lagendX + 40, lagendY + 20)
+			
+			lagendY += 50
+
+
+		})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			height: 100vh;
+			background-color: #eee;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		canvas {
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 1px 3px black;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas></canvas>
+
+	<script>
+		let canvas = document.querySelector("canvas")
+		let ctx = canvas.getContext("2d")
+		canvas.width = 500
+		canvas.height = 300
+
+		let startX = 50
+		let startY = 250
+		let label = ["Banana", "Apple", "BlueBary", "WaterMalon"]
+		let data = [50, 60, 15, 100]
+		let colors = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"];
+		let max = Math.max(...data)
+		let gap = 35
+		let barWidth = 60
+
+		ctx.beginPath()
+
+		data.forEach((value, index) => {
+			ctx.fillStyle = colors[index]
+			let barHeight = (value / max) * 180	
+			let x = startX + gap + index * (barWidth + gap) 
+			let y = startY - barHeight
+			ctx.fillRect(x,y,barWidth,barHeight) 
+		})
+
+		ctx.moveTo(startX, startY)
+		ctx.lineTo(startX + 400, startY)
+		ctx.lineTo(startX, startY)
+		ctx.lineTo(startX, startY - 200)
+
+		ctx.fillStyle = "#000"
+		ctx.lineWidth = 3
+		ctx.stroke()
+
+	</script>
+</body>
+
+</html>

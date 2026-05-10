@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Expense Tracker Application</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+	<main>
+		<h1>Expense Tracker Application</h1>
+
+		<section>
+			<form action="">
+				<h2>Add expenses</h2>
+				<div class="inputContainer">
+					<div class="inputControl">
+						<label for="description">Description</label>
+						<input required type="text" name="description" id="description">
+					</div>
+					<div class="inputControl">
+						<label for="amount">Amount</label>
+						<input required type="text" name="amount" id="amount">
+					</div>
+					<div class="inputControl">
+						<label for="catagory">Catagory</label>
+						<select type="text" name="catagory" id="catagory">
+							<option disabled selected value="Select Catagory">Select Catagory</option>
+							<option value="Food">Food</option>
+							<option value="Shopping">Shopping</option>
+							<option value="Transport">Transport</option>
+							<option value="Bills">Bills</option>
+							<option value="Other">Other</option>
+						</select>
+					</div>
+					<div class="inputControl">
+						<label for="date">Date</label>
+						<input required type="date" name="date" id="date">
+					</div>
+					<div class="inputControl">
+						<button type="submit">Add Expenses</button>
+					</div>
+				</div>
+			</form>
+		</section>
+
+		<section>
+			<h2>Filter</h2>
+			<div class="inputContainer">
+				<div class="inputControl">
+					<label for="filterCatagory">Catagory</label>
+					<select type="text" name="filterCatagory" id="filterCatagory">
+						<option selected value="All Catagory">All Catagory</option>
+						<option value="Food">Food</option>
+						<option value="Shopping">Shopping</option>
+						<option value="Transport">Transport</option>
+						<option value="Bills">Bills</option>
+						<option value="Other">Other</option>
+					</select>
+				</div>
+				<div class="inputControl">
+					<label for="dateStart">Date Start</label>
+					<input type="date" name="dateStart" id="dateStart">
+				</div>
+				<div class="inputControl">
+					<label for="dateEnd">Date End</label>
+					<input type="date" name="dateEnd" id="dateEnd">
+				</div>
+				<div class="inputControl">
+					<button>Add Expenses</button>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<h2>Expense List</h2>
+			<table>
+				<thead>
+					<tr>
+						<td>
+							<h4>Description</h4>
+						</td>
+						<td>
+							<h4>Amount</h4>
+						</td>
+						<td>
+							<h4>Category</h4>
+						</td>
+						<td>
+							<h4>Date</h4>
+						</td>
+						<td>
+							<h4>Actions</h4>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</section>
+		<section>
+			<h3>Total Spent</h3>
+			<h3>RM <span id="ttl">0.00</span></h3>
+
+			<div class="canvas">
+				<canvas>
+
+				</canvas>
+			</div>
+			<article class="mountlu-summery">
+
+				<div class="mounly">
+					<h3 id="tarikh">2026-05</h3>
+					<h4>Total <span id="ttl"></span></h4>
+					<p></p>
+				</div>
+
+			</article>
+		</section>
+
+
+
+	</main>
+	<script src="./app.js"></script>
+</body>
+
+</html>

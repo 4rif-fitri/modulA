@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			height: 100vh;
+			background-color: #eee;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		canvas {
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 1px 3px black;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas></canvas>
+
+	<script>
+		let canvas = document.querySelector("canvas")
+		let ctx = canvas.getContext("2d")
+		canvas.width = 500
+		canvas.height = 300
+
+		let labels = ["Student A", "Student B", "Student C", "Student D", "Student E", "Student F"]
+		let datas = [50, 20, 30, 40, 90, 40]
+		let colors = ["blue", "navy", "lightblue", "red", "lightcoral", "lightgreen"]
+		let centerX = 300 / 2
+		let centerY = 300 / 2
+		let radius = 100
+		let startAngle = 0
+		let total = datas.reduce((acc,curr) => acc + curr,0)
+		
+		
+		datas.forEach((data,index) => {
+			let slideAngle = (data / total) * Math.PI * 2 
+			ctx.beginPath()
+			ctx.fillStyle = colors[index]
+			ctx.moveTo(centerX, centerY)
+			ctx.arc(centerX,centerY, radius, startAngle, startAngle + slideAngle)
+			ctx.closePath()
+			ctx.fill()
+			ctx.stroke()
+			startAngle += slideAngle
+		})
+		
+
+	</script>
+</body>
+
+</html>

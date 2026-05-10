@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bar Chart Canvas</title>
+
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: #eee;
+		}
+
+		canvas {
+			background: white;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+			border-radius: 10px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<canvas id="canvas"></canvas>
+
+	<script>
+		const canvas = document.getElementById("canvas");
+		const ctx = canvas.getContext("2d");
+
+		canvas.width = 800;
+		canvas.height = 500;
+
+		// DATA
+		const data = [120, 200, 150, 300, 250];
+		const labels = ["Food", "Bills", "Shopping", "Transport", "Other"];
+
+		const colors = [
+			"#FF6384",
+			"#36A2EB",
+			"#FFCE56",
+			"#4BC0C0",
+			"#9966FF"
+		];
+
+		// GRAPH SETTINGS
+		const chartHeight = 350;
+		const chartWidth = 600;
+
+		const startX = 100;
+		const startY = 400;
+
+		const barWidth = 70;
+		const gap = 40;
+
+		// MAX VALUE
+		const max = Math.max(...data);
+
+		// =========================
+		// AXIS
+		// =========================
+
+		ctx.beginPath();
+
+		// Y axis
+		ctx.moveTo(startX, 50);
+		ctx.lineTo(startX, startY);
+
+		// X axis
+		ctx.lineTo(startX + chartWidth, startY);
+
+		ctx.strokeStyle = "#000";
+		ctx.lineWidth = 2;
+		ctx.stroke();
+
+		// =========================
+		// BARS
+		// =========================
+
+		data.forEach((value, index) => {
+
+			// convert value to height
+			const barHeight = (value / max) * chartHeight;
+
+			const x = startX + 30 + (barWidth + gap) * index;
+
+			const y = startY - barHeight;
+
+			// BAR
+			ctx.fillStyle = colors[index];
+
+			ctx.fillRect(
+				x,
+				y,
+				barWidth,
+				barHeight
+			);
+
+			// VALUE TEXT
+			ctx.fillStyle = "#000";
+			ctx.font = "16px Arial";
+			ctx.textAlign = "center";
+
+			ctx.fillText(
+				value,
+				x + barWidth / 2,
+				y - 10
+			);
+
+			// LABEL
+			ctx.fillText(
+				labels[index],
+				x + barWidth / 2,
+				startY + 25
+			);
+		});
+
+		// =========================
+		// TITLE
+		// =========================
+
+		ctx.font = "bold 24px Arial";
+		ctx.fillText(
+			"Expense Bar Chart",
+			canvas.width / 2,
+			40
+		);
+	</script>
+
+</body>
+
+</html>

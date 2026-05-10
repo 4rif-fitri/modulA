@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body{
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #eee;
+		}
+		canvas{
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 1px 5px black;
+		}
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+	<script>
+		let datas = [10,30,50,40,60,70]
+		let labels = ["Student A","Student B","Student C","Student D","Student E","Student F"]
+		let colors = ["red","lightcoral","blue","lightblue","navy","skyblue"]
+	
+		let canvas = document.querySelector("canvas")
+		canvas.width = 700
+		canvas.height = 400
+		let ctx = canvas.getContext("2d")
+
+		let centerX = 200
+		let centerY = 200
+		let radius = 150
+		let total = datas.reduce((acc,value) => acc + value, 0)
+		let startAngle = 0
+		console.log(total);
+
+		let legendStartX = 400
+		let legendStartY = 50
+
+		datas.forEach((data,index) => {
+			let sliceAngle = (data / total) * Math.PI * 2
+			ctx.beginPath()
+			ctx.moveTo(centerX,centerY)
+			ctx.fillStyle = colors[index]
+
+			ctx.arc(centerX,centerY,radius, startAngle, startAngle + sliceAngle)
+
+			ctx.closePath()
+			ctx.fill()
+			
+			let midAngle = startAngle + sliceAngle / 2
+			let x = centerX + Math.cos(midAngle) * 100
+			let y = centerY + Math.sin(midAngle) * 100
+			let percent = `${((data / total) * 360).toFixed(1)}%`
+		
+			ctx.strokeStyle = "#fff";
+			ctx.font = "bold 14px Arial";
+			ctx.lineWidth = 3;
+			ctx.strokeText(percent, x, y);
+			ctx.fillStyle = "#000";
+			ctx.fillText(percent, x, y);
+			
+			startAngle += sliceAngle
+
+			ctx.fillStyle = colors[index]
+			ctx.fillRect(legendStartX,legendStartY, 30,30)
+			ctx.fillText(labels[index], legendStartX + 40, legendStartY + 20)
+			legendStartY += 40
+		})
+
+		ctx.fillStyle = "#000"
+		ctx.fillText("PIE CHART",170,370)
+
+	</script>
+</body>
+</html>

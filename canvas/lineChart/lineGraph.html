@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin: 0;box-sizing: border-box;}
+		body{
+			background-color: #eee;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		canvas{
+			background-color: #000;
+			box-shadow: 0 1px 3px black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>	
+
+	<script>
+
+		let datas = [200,150,170,100,80,50,350,200,200,230]
+		
+
+		let canvas = document.getElementById("canvas")
+		let ctx = canvas.getContext("2d")
+		canvas.height = 400
+		canvas.width = 700
+	
+		ctx.strokeStyle = "#fff"
+		ctx.lineWidth = 2
+
+		let start_value = datas[0]
+		let distense = canvas.width / datas.length
+		let start_point = 0
+
+		ctx.beginPath()
+
+		ctx.lineWidth = 5
+		ctx.strokeStyle = "red"
+
+		ctx.moveTo(start_point, start_value)
+		datas.forEach((velue,index) => {
+			let new_distence =  start_point + (distense * (index + 1)) 
+			ctx.lineTo(new_distence, velue)
+		});
+
+		ctx.lineTo(canvas.width, canvas.height)
+		ctx.lineTo(start_point, canvas.height)
+		ctx.lineTo(start_point, start_value)
+
+		ctx.fillStyle = "grey"
+		ctx.fill()
+		ctx.stroke()
+
+	</script>
+</body>
+</html>

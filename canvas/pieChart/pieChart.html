@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pie Chart</title>
+
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			height: 100vh;
+			background: #eee;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		canvas {
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+		}
+	</style>
+</head>
+
+<body>
+
+	<canvas id="myCanvas"></canvas>
+
+	<script>
+		const canvas = document.getElementById("myCanvas");
+		const ctx = canvas.getContext("2d");
+
+		canvas.width = 600;
+		canvas.height = 400;
+
+		const data = [30, 70, 45, 65];
+		const labels = ["Food", "Transport", "Bills", "Shopping"];
+		const colors = ["#FF6384","#36A2EB","#FFCE56","#4BC0C0"];
+
+		const total = data.reduce((sum, val) => sum + val, 0);
+		
+		let startAngle = 0;
+
+		const centerX = 200;
+		const centerY = 200;
+		const radius = 120;
+
+		data.forEach((value, index) => {
+
+			const sliceAngle = (value / total) * Math.PI * 2;
+
+			// Draw slice
+			ctx.beginPath();
+
+			ctx.moveTo(centerX, centerY);
+
+			ctx.fillStyle = colors[index];
+
+			ctx.arc(
+				centerX,
+				centerY,
+				radius,
+				startAngle,
+				startAngle + sliceAngle
+			);
+
+			ctx.closePath();
+
+			ctx.fill();
+
+			// White border
+			ctx.strokeStyle = "#fff";
+			ctx.lineWidth = 3;
+			ctx.stroke();
+
+			// ===== TEXT PERCENT =====
+
+			const middleAngle = startAngle + sliceAngle / 2;
+
+			const textX = centerX + Math.cos(middleAngle) * 70;
+			const textY = centerY + Math.sin(middleAngle) * 70;
+
+			const percent = ((value / total) * 100).toFixed(1) + "%";
+
+			ctx.fillStyle = "#000";
+			ctx.font = "bold 14px Arial";
+			ctx.textAlign = "center";
+
+			ctx.fillText(percent, textX, textY);
+
+			startAngle += sliceAngle;
+		});
+
+		// ===== LEGEND =====
+
+		labels.forEach((label, index) => {
+
+			const x = 400;
+			const y = 80 + index * 40;
+
+			// color box
+			ctx.fillStyle = colors[index];
+			ctx.fillRect(x, y, 20, 20);
+
+			// text
+			ctx.fillStyle = "#000";
+			ctx.font = "16px Arial";
+
+			ctx.fillText(label, x + 40, y + 15);
+		});
+	</script>
+
+</body>
+
+</html>

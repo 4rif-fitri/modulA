@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body{
+			background-color: #eee;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		canvas{
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 1px 3px black;
+		}
+	</style>
+</head>
+<body>
+	<canvas></canvas>
+	<script>
+		let canvas = document.querySelector("canvas")
+		let ctx = canvas.getContext("2d")
+		canvas.width = 700
+		canvas.height = 300
+		
+		let datas = [10,50,90,70,30,50]
+		let labels = ["Student 1", "Student 2", "Student 3", "Student 4", "Student 5", "Student 6",]
+		let colors = [
+			"navy",
+			"blue",
+			"lightblue",
+			"skyblue",
+			"lightcoral",
+			"red",
+			]
+		
+		let startX = 50
+		let startY = 250
+		let max = Math.max(...datas)
+		let gap = 30
+		let barWidth = 70
+
+		ctx.beginPath()
+		ctx.moveTo(startX, startY)
+		ctx.lineTo(startX + 600, startY) 
+		ctx.lineTo(startX, startY)
+		ctx.lineTo(startX, startY -200) 
+
+		datas.forEach((value,index) => {
+			let barHeight = (value / max) * 200
+			let x = startX + gap + index * (barWidth + gap)
+			let y = startY - barHeight
+			ctx.fillStyle = colors[index]
+			ctx.fillRect(x,y,barWidth,barHeight) 
+			ctx.font = "bold 0.75rem arial"
+
+			ctx.fillText(`${datas[index]} Mark`,x,y-10)
+			ctx.fillText(`${labels[index]} Mark`, x, startY + 15)
+		})
+
+		ctx.fillStyle = "#000"
+		ctx.lineWidth = 3
+		ctx.stroke()
+	</script>
+</body>
+</html>

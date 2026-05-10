@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			height: 100vh;
+			background-color: #eee;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		canvas {
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 1px 3px black;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas></canvas>
+
+	<script>
+		let canvas = document.querySelector("canvas")
+		let ctx = canvas.getContext("2d")
+		canvas.width = 500
+		canvas.height = 300
+
+		let labels = ["Student A", "Student B", "Student C", "Student D", "Student E", "Student F"]
+		let datas = [50, 20, 30, 40, 90, 40]
+		let colors = ["blue", "navy", "lightblue", "red", "lightcoral", "lightgreen"]
+		let centerX = 300 / 2
+		let centerY = 300 / 2
+		let startAngle = 0
+		let radius = 130
+		let total = datas.reduce((acc,cur) => acc+cur,0)
+		let lagendX = 300
+		let lagendY = 50
+
+		datas.forEach((data,index) => {
+			let slideAngle = (data / total) * Math.PI * 2
+
+			ctx.beginPath()
+			ctx.moveTo(centerX,centerY)
+			ctx.arc(centerX, centerY, radius,startAngle, startAngle + slideAngle)
+			ctx.fillStyle = colors[index]
+			ctx.fill()
+			ctx.closePath()
+
+			let percent = `${((data / total) * 100).toFixed(1)}%`
+			let midAngle = startAngle + slideAngle / 2
+			let x = centerX + Math.cos(midAngle) * 90
+			let y = centerY + Math.sin(midAngle) * 90
+			ctx.font = "0.8rem arial"
+			ctx.strokeStyle = "#000"
+			ctx.lineWidth = 3
+			ctx.strokeText(percent, x - 15, y)
+			ctx.fillStyle = "#fff"
+			ctx.fillText(percent,x - 15,y)
+
+			// ctx.fillText(labels[index], lagendX, lagendY)
+			ctx.font = "bold 1rem arial"
+			ctx.fillStyle = colors[index]
+			ctx.fillRect(lagendX, lagendY, 20, 20)
+			ctx.fillText(labels[index], lagendX + 30, lagendY + 15)
+			lagendY += 30
+			
+			startAngle += slideAngle
+		})
+
+	</script>
+</body>
+
+</html>

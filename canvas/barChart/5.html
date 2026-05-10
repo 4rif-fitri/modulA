@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin: 0;box-sizing: border-box;}
+		body{
+			background-color: #eee;
+			height: 100vh;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		canvas{
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 1px 3px black;
+		}
+	</style>
+</head>	
+<body>
+	<canvas></canvas>
+
+	<script>
+		let datas = [10,50,90,40,50,60]
+		let labels = ["Banana", "Apple", "Pizza", "Computer", "Moniter", "Food"]
+		let colors = ["red","blue","gray","royalblue","green","orange"]
+
+		let canvas = document.querySelector("canvas")
+		let ctx = canvas.getContext("2d")
+		canvas.width = 600
+		canvas.height = 350
+
+		let startX = 50 
+		let startY = 300
+		let max = Math.max(...datas)
+		let barWidth = 60
+		let gap = 20
+
+		ctx.beginPath()
+		ctx.font = "2rem arial"
+		ctx.fillText("BAR GRAPH",200,40)
+
+		ctx.moveTo(startX, startY)
+		ctx.lineTo(startX + 500, startY)
+		ctx.lineTo(startX, startY)
+		ctx.lineTo(startX, startY - 250)
+
+		datas.forEach((data, index) => {
+			ctx.fillStyle = colors[index]
+			let barHeight = (data / max) * 200
+			let x = startX + gap + index * (barWidth + gap)
+			let y = startY - barHeight
+
+			ctx.font = "1rem arial"
+			ctx.fillRect(x,y,barWidth,barHeight)
+			ctx.fillText(`${data} Buah`, x, y - 10)
+			ctx.fillText(labels[index], x, startY + 20)
+		})
+
+		ctx.fillStyle = "#000"
+		ctx.lineWidth = 3
+		ctx.stroke()
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: #eee;
+			height: 100vh;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		canvas {
+			background-color: white;
+			box-shadow: 0 1px 3px black;
+			border-radius: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas></canvas>
+	<script>
+		let canvas = document.querySelector("canvas")
+		let ctx = canvas.getContext("2d")
+		canvas.width = 600
+		canvas.height = 400
+
+		const data = [120, 200, 150, 300, 250];
+		const labels = ["Food", "Bills", "Shopping", "Transport", "Other"];
+		const colors = ["#FF6384","#36A2EB","#FFCE56","#4BC0C0","#9966FF"];
+
+		let startPointX = 50
+		let startPointY = 350
+		let barWidth = 60
+		let gap = 30
+		let max = Math.max(...data)
+		console.log(max);
+
+		ctx.beginPath()
+		ctx.moveTo(startPointX, startPointY)
+		ctx.lineTo(startPointX + 500, startPointY)
+		ctx.lineTo(startPointX, startPointY)
+		ctx.lineTo(startPointX, startPointY - 300)
+		ctx.lineTo(startPointX, startPointY)
+
+		data.forEach((value, index) => {
+			let batHeight = (value / max) * 250
+		
+			let x = startPointX + gap + index * (barWidth + gap)
+			let y = startPointY - batHeight
+
+			ctx.fillStyle = colors[index]
+
+			ctx.fillRect(x,y, barWidth, batHeight)
+
+			ctx.fillText(value , x + barWidth / 4, y - 10)
+
+			ctx.fillText(labels[index], x + barWidth / 4, startPointY + 20)
+		})
+
+		ctx.strokeStyle = "#000"
+		ctx.lineWidth = 3
+		ctx.stroke()
+
+	</script>
+</body>
+
+</html>
